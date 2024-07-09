@@ -15,7 +15,7 @@ export default function HomePage() {
   return (
     <React.Fragment>
       <Head>
-        <title>Home - Nextron (basic-lang-javascript)</title>
+        <title>ASOFT Student Enrolment Platform</title>
       </Head>
       <div>
         <p>
@@ -34,7 +34,7 @@ export default function HomePage() {
             window.ipc.send('message', 'Hello')
           }}
         >
-          Test IPC
+          WASIQ
         </button>
         <p>{message}</p>
       </div>

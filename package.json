@@ -6,8 +6,9 @@
   "author": "Yoshihide Shiono <shiono.yoshihide@gmail.com>",
   "main": "app/background.js",
   "scripts": {
-    "dev": "nextron",
-    "build": "nextron build",
+    "build:css": "tailwindcss -i ./renderer/public/tailwind.css -o ./renderer/public/build.css",
+    "build": "npm run build:css && nextron build",
+    "dev": "npm run build:css && nextron",
     "postinstall": "electron-builder install-app-deps"
   },
   "dependencies": {
@@ -20,6 +21,7 @@
     "next": "^14.2.4",
     "nextron": "^9.1.0",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "tailwindcss": "^3.4.4"
   }
 }
