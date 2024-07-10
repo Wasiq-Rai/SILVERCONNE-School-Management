@@ -7,6 +7,10 @@ module.exports = {
     unoptimized: true,
   },
   webpack: (config) => {
-    return config
+    config.externals = {
+      electron: 'electron',
+      critters: 'critters',
+    };
+    return config;
   },
 }

@@ -1,10 +1,17 @@
-import React from 'react';
+import { useUser } from "../../app/hooks/UseUser";
 import { useRouter } from 'next/router';
-import { useUserRole } from '../hooks/useUserRole';
+import { useEffect } from "react";
 
 const Dashboard = () => {
+  const { user, role, loading, signOut } = useUser();
   const router = useRouter();
-  const { role } = useUserRole(); // Custom hook to get user role
+
+  if (loading) return <div>Loading...</div>;
+  useEffect(() => {
+    if (!user) {
+      router.push('./signin');
+    }
+  }, [user, router]);
 
   const navigation = {
     superAdmin: [
@@ -23,7 +30,9 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center">
-      <h1 className="text-3xl font-bold mb-8">Welcome to ASOFT</h1>
+      {user && (
+        <h1 className="text-3xl font-bold mb-8">Welcome, {user.name}</h1>
+      )}
       <div className="w-full max-w-4xl grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {userNavigation.map((item) => (
           <button
@@ -35,6 +44,9 @@ const Dashboard = () => {
           </button>
         ))}
       </div>
+      <button onClick={() => signOut()} className="mt-8 p-2 bg-red-500 text-white rounded">
+        Sign Out
+      </button>
     </div>
   );
 };
