@@ -53,10 +53,12 @@ let schools = [
 ];
 
 ipcMain.handle('fetch-schools', async (event) => {
+  console.log('Main process: Received fetch-schools request');
   return schools;
 });
 
 ipcMain.handle('add-school', async (event, schoolData) => {
+  console.log('Main process: Received add-school request');
   const newSchool = {
     id: schools.length + 1,
     ...schoolData
@@ -66,6 +68,7 @@ ipcMain.handle('add-school', async (event, schoolData) => {
 });
 
 ipcMain.handle('update-school', async (event, updatedSchool) => {
+  console.log('Main process: Received update-school request');
   const index = schools.findIndex(school => school.id === updatedSchool.id);
   if (index !== -1) {
     schools[index] = updatedSchool;
@@ -75,6 +78,7 @@ ipcMain.handle('update-school', async (event, updatedSchool) => {
 });
 
 ipcMain.handle('delete-school', async (event, id) => {
+  console.log('Main process: Received delete-school request');
   const index = schools.findIndex(school => school.id === id);
   if (index !== -1) {
     schools.splice(index, 1);
